@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,11 @@ Route::middleware('guest')->group(function() {
 
 Route::middleware('auth')->group(function() {
    Route::post('/logout', [AuthController::class, 'logout']);
+
+   Route::apiResource('/users', UserController::class);
+   Route::post('/users/{id}/delete', [UserController::class, 'delete']);
+
+   Route::apiResource('/products', ProductController::class);
 });
 
 Route::middleware('auth')->get('/test', function() {
