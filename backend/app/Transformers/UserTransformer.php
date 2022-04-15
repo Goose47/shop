@@ -37,9 +37,9 @@ class UserTransformer extends TransformerAbstract
             'full_name' => $user->full_name,
             'email' => $user->email,
             'phone_number' => $user->phone_number,
-            'created_at' => $user->created_at,
-            'updated_at' => $user->updated_at,
-            'deleted_at' => $user->deleted_at
+            'created_at' => isset($user->created_at) ? $user->created_at->toDateTimeString() : null,
+            'updated_at' => isset($user->updated_at) ? $user->updated_at->toDateTimeString() : null,
+            'deleted_at' => isset($user->deleted_at) ? $user->deleted_at->toDateTimeString() : null,
         ];
     }
 }

@@ -36,6 +36,7 @@ class UserController extends Controller
         UserStoreUseCase $case
     ): Fractal
     {
+        dd('lol');
         return fractal($case($request), new UserTransformer());
     }
 

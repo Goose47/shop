@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\SendResetLinkRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Mail\PasswordResetLink;
@@ -11,8 +12,8 @@ use DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use PHPUnit\Exception;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use function fractal;
 
 class PasswordResetController extends Controller
 {

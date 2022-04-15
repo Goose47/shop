@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Users;
+namespace App\Http\Requests\Products;
 
-use App\Rules\ImageArrayItemRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserStoreRequest extends FormRequest
+class ProductStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,11 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'phone_number' => 'required|integer',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|confirmed|string|min:8'
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'images' => 'required|array|max:3',
+            'images.*' => 'image'
         ];
     }
 }

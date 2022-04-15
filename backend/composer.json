@@ -10,6 +10,7 @@
         "laravel/framework": "^9.2",
         "laravel/passport": "^10.4",
         "laravel/sanctum": "^2.14.1",
+        "laravel/telescope": "^4.8",
         "laravel/tinker": "^2.7",
         "spatie/laravel-fractal": "^6.0",
         "symfony/http-client": "^6.0",
