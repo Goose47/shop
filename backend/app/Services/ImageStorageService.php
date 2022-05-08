@@ -13,14 +13,14 @@ class ImageStorageService
     {
         $savedImage = $this->getImageModel($image->getClientOriginalExtension());
 
-        Storage::putFileAs("images/", $image, "{$savedImage->id}.{$image->getClientOriginalExtension()}");
+        Storage::putFileAs("/public/images/", $image, "{$savedImage->id}.{$image->getClientOriginalExtension()}");
 
         return $savedImage;
     }
 
     public function deleteImage(Image $image)
     {
-        Storage::delete("/images/{$image->id}.{$image->extension}");
+        Storage::delete("/public/images/{$image->id}.{$image->extension}");
 
         $image->delete();
     }

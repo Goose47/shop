@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index(): Fractal
     {
-        return fractal(Product::all(), new ProductTransformer());
+        return fractal(Product::selectRaw('*, SUBSTRING(description, 1, 150) as description')->get(), new ProductTransformer());
     }
 
     /**

@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
             'first_name' => 'string',
             'last_name' => 'string',
             'phone_number' => 'integer',
-            'email' => 'string|email|unique:users,email'
+            'email' => 'string|email'
         ];
     }
 }

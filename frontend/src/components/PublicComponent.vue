@@ -1,5 +1,5 @@
 <template>
-
+  <router-view></router-view>
 </template>
 
 <script>
@@ -8,6 +8,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+.error_msg {
+  color: #ff473a;
+  padding-left: 2px;
+}
 </style>

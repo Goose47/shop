@@ -23,6 +23,8 @@ class AuthController extends Controller
         if($user) {
             if(Hash::check($request->input('password'), $user->password)) {
                 $token = $user->createToken('jwt')->accessToken;
+
+                $cookie = \cookie('jwt', $token, 3600);
             } else {
                 throw new BadRequestHttpException('Password mismatch');
             }
@@ -30,7 +32,10 @@ class AuthController extends Controller
             throw new BadRequestHttpException('There is no such user');
         }
 
-        return fractal($token, new AccessTokenTransformer());
+//        return fractal($token, new AccessTokenTransformer());
+        return \response([
+            'token' => $token
+        ])->withCookie($cookie);
     }
 
     public function logout()
@@ -47,5 +52,10 @@ class AuthController extends Controller
             ]);
 
         return fractal($user, new UserTransformer());
+    }
+
+    public function user()
+    {
+        return fractal(auth()->user(), new UserTransformer());
     }
 }

@@ -35,6 +35,8 @@ class UserTransformer extends TransformerAbstract
         return [
             'id' => $user->id,
             'full_name' => $user->full_name,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
             'email' => $user->email,
             'phone_number' => $user->phone_number,
             'created_at' => isset($user->created_at) ? $user->created_at->toDateTimeString() : null,

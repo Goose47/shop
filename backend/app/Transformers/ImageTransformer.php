@@ -33,7 +33,7 @@ class ImageTransformer extends TransformerAbstract
     public function transform(Image $image)
     {
         return [
-            'path' => $image->path,
+            'path' => $image->full_link,
             'created_at' => isset($image->created_at) ? $image->created_at->toDateTimeString() : null,
             'udpated_at' => isset($image->udpated_at) ? $image->udpated_at->toDateTimeString() : null,
         ];

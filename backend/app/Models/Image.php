@@ -21,8 +21,15 @@ class Image extends Model
         return $this->morphTo();
     }
 
-    public function getPathAttribute()
+    public function getPathAttribute(): string
     {
         return "images/{$this->id}.{$this->extension}";
+    }
+
+    public function getFullLinkAttribute(): string
+    {
+        $link = env('APP_URL');
+
+        return "$link/storage/{$this->path}";
     }
 }
