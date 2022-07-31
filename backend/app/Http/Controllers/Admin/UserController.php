@@ -48,9 +48,9 @@ class UserController extends Controller
         return fractal($case($request, $user), new UserTransformer());
     }
 
-    public function destroy(User $user): Fractal
+    public function destroy($id): Fractal
     {
-        $user->forceDelete();
+        User::withTrashed()->find($id)->forceDelete();
 
         return fractal(true, new SuccessTransformer());
     }

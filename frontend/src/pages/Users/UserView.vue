@@ -1,5 +1,8 @@
 <template>
-  <p>{{user.id}}</p>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h2 class="page_title">User #{{ user.id }}</h2>
+  </div>
+
   <p>{{user.full_name}}</p>
   <p>{{user.email}}</p>
   <p>{{user.phone_number}}</p>
@@ -7,20 +10,13 @@
 
 <script>
 import userService from "@/services/user.service";
+import userObjectMixin from "@/mixins/objects/userObjectMixin";
 
 export default {
   name: "UserView",
-  data() {
-    return {
-      user: {
-        id: 0,
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone_number: 0,
-      }
-    }
-  },
+  mixins: [
+      userObjectMixin
+  ],
   methods: {
     async fetchUser(id) {
       const res = await userService.find(id)

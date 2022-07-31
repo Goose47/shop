@@ -9,8 +9,12 @@
   "dependencies": {
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "filepond": "^4.30.4",
+    "filepond-plugin-file-validate-type": "^1.2.8",
+    "filepond-plugin-image-preview": "^4.6.11",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.13",
+    "vue-filepond": "^7.0.3",
     "vue-router": "^4.0.3",
     "vue3-click-away": "^1.2.4",
     "vuex": "^4.0.0",

@@ -18,7 +18,11 @@ class ProductUpdateUseCase
 
     public function __invoke(ProductUpdateRequest $request, Product $product)
     {
-        $product->update($request->except('images'));
+        $product->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price') * 100,
+        ]);
 
         if($request->has('images')){
             $previousImages = $product->images;

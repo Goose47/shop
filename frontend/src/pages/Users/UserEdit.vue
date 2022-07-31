@@ -1,4 +1,7 @@
 <template>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2 class="page_title">Edit user</h2>
+</div>
 <div class="container">
   <main>
     <div class="row g-5">
@@ -73,34 +76,25 @@
 <script>
 import userService from "@/services/user.service";
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import * as yup from 'yup';
 import router from "@/router";
+import userObjectMixin from "@/mixins/objects/userObjectMixin";
+import schema from "@/schemas/users/userEditSchema";
 
 export default {
   components: {
     Form, Field, ErrorMessage
   },
   name: "UserEdit",
+  mixins: [
+    userObjectMixin
+  ],
   setup() {
-    const schema = yup.object({
-      first_name: yup.string().required("First name is required"),
-      last_name: yup.string().required("Last name is required"),
-      email: yup.string().required("Email is required").email("Email must be a valid email address"),
-      phone_number: yup.number().typeError("Phone number must be a number"),
-    })
     return {
       schema
     }
   },
   data() {
     return {
-      user: {
-        id: 0,
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone_number: 0,
-      },
       errors: []
     }
   },

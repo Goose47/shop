@@ -8,7 +8,7 @@
             name="first_name"
             class="form-control"
             placeholder="name@example.com"
-            v-model="data.first_name"
+            v-model="user.first_name"
         />
         <label>First Name</label>
         <ErrorMessage name="first_name" class="error_msg"/>
@@ -18,7 +18,7 @@
             name="last_name"
             class="form-control"
             placeholder="name@example.com"
-            v-model="data.last_name"
+            v-model="user.last_name"
         />
         <label>Last Name</label>
         <ErrorMessage name="last_name" class="error_msg"/>
@@ -28,7 +28,7 @@
             name="phone_number"
             class="form-control"
             placeholder="name@example.com"
-            v-model="data.phone_number"
+            v-model="user.phone_number"
         />
         <label>Phone Number</label>
         <ErrorMessage name="phone_number" class="error_msg"/>
@@ -38,7 +38,7 @@
             name="email"
             class="form-control"
             placeholder="name@example.com"
-            v-model="data.email"
+            v-model="user.email"
         />
         <label>Email address</label>
         <ErrorMessage name="email" class="error_msg"/>
@@ -49,7 +49,7 @@
             name="password"
             class="form-control mb-0"
             placeholder="Password"
-            v-model="data.password"
+            v-model="user.password"
         />
         <label>Password</label>
         <ErrorMessage name="password" class="error_msg"/>
@@ -60,7 +60,7 @@
             name="password_confirmation"
             class="form-control"
             placeholder="Confirm your password"
-            v-model="data.password_confirmation"
+            v-model="user.password_confirmation"
         />
         <label>Password Confirmation</label>
         <ErrorMessage name="password_confirmation" class="error_msg"/>
@@ -76,44 +76,32 @@
 
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import * as yup from 'yup';
 import authService from "@/services/auth.service";
+import schema from "@/schemas/users/userCreateSchema";
+import userWithPasswordFieldsObjectMixin from "@/mixins/objects/userWithPasswordFieldsObjectMixin";
 
 export default {
   components: {
     Form, Field, ErrorMessage
   },
   name: "Register",
+  mixins: [
+      userWithPasswordFieldsObjectMixin
+  ],
   setup() {
-    const schema = yup.object({
-      first_name: yup.string().required("First name is required"),
-      last_name: yup.string().required("Last name is required"),
-      email: yup.string().required("Email is required").email(),
-      phone_number: yup.number().typeError("Phone must be a number"),
-      password: yup.string().required().min(8),
-      password_confirmation: yup.string().oneOf([yup.ref('password')], "Passwords do not match").required("Confirm your password")
-    })
     return {
       schema
     }
   },
   data() {
     return {
-      data: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone_number: '',
-        password: '',
-        password_confirmation: ''
-      },
       errors: []
     }
   },
   methods: {
     register() {
       console.log(this.data)
-      authService.register(this.data).then(res => {
+      authService.register(this.user).then(res => {
         this.$router.push({
           name: "login"
         })

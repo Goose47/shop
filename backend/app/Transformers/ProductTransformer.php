@@ -36,7 +36,7 @@ class ProductTransformer extends TransformerAbstract
             'id' => $product->id,
             'name' => $product->name,
             'description' => $product->description,
-            'price' => $product->price,
+            'price' => $product->price / 100,
             'created_at' => isset($product->created_at) ? $product->created_at->toDateTimeString() : null,
             'updated_at' => isset($product->updated_at) ? $product->updated_at->toDateTimeString() : null,
         ];

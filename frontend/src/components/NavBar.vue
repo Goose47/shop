@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow navbar_background">
     <router-link class="navbar-brand col-md-3 col-lg-2 me-0 px-3" to="#">
       Shop
     </router-link>
@@ -38,6 +38,9 @@ export default {
 </script>
 
 <style>
+.navbar_background {
+  z-index: 100;
+}
 .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;

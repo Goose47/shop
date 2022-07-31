@@ -19,7 +19,11 @@ class ProductStoreUseCase
 
     public function __invoke(ProductStoreRequest $request)
     {
-        $product = Product::create($request->except('images'));
+        $product = Product::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price') * 100,
+        ]);
 
         if ($request->has('images')) {
             foreach($request->file('images') as $image) {
