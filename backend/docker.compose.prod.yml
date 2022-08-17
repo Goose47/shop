@@ -1,0 +1,62 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: shop_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/html
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/ssl/:/etc/nginx/ssl/
+    networks:
+      - shop
+  laravel:
+    container_name: shop_laravel
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shop/laravel
+    volumes:
+      - '.:/var/www/shop'
+    networks:
+      - shop
+    depends_on:
+      - pgsql
+      - redis
+  pgsql:
+    container_name: shop_postgres
+    restart: unless-stopped
+    image: 'postgres:14'
+    ports:
+      - '5432:5432'
+    environment:
+      PGPASSWORD: 'shop'
+      POSTGRES_DB: 'shop'
+      POSTGRES_USER: 'shop'
+      POSTGRES_PASSWORD: 'shop'
+    volumes:
+      - 'sail-pgsql:/var/lib/postgresql/data'
+    networks:
+      - shop
+  redis:
+    container_name: shop_redis
+    restart: unless-stopped
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'sail-redis:/data'
+    networks:
+      - shop
+networks:
+  sail:
+    driver: bridge
+volumes:
+  sail-pgsql:
+    driver: local
+  sail-redis:
+    driver: local
