@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     image: shop/laravel
     volumes:
-      - '.:/var/www/shop'
+      - '.:/var/www/shop/backend'
     networks:
       - shop
     depends_on:
