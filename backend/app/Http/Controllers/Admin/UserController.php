@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Filters\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserDeleteRequest;
 use App\Http\Requests\Users\UserStoreRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
-use App\Mail\OrderShipped;
 use App\Models\User;
 use App\Transformers\SuccessTransformer;
 use App\Transformers\UserTransformer;
@@ -14,14 +14,13 @@ use App\UseCases\Users\UserDeleteUseCase;
 use App\UseCases\Users\UserStoreUseCase;
 use App\UseCases\Users\UserUpdateUseCase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Spatie\Fractal\Fractal;
 
 class UserController extends Controller
 {
-    public function index(): Fractal
+    public function index(Request $request, UserFilter $filter): Fractal
     {
-        return fractal(User::withTrashed()->get(), new UserTransformer());
+        return fractal(User::withTrashed()->filter($filter)->latest()->paginate($request->input('per_page', 2)), new UserTransformer());
     }
 
     public function show($id): Fractal

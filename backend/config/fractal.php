@@ -8,7 +8,8 @@ return [
      */
 //    'default_serializer' => '',
 //    'default_serializer' => \League\Fractal\Serializer\ArraySerializer::class,
-    'default_serializer' => \Spatie\Fractalistic\ArraySerializer::class,
+//    'default_serializer' => \Spatie\Fractalistic\ArraySerializer::class,
+    'default_serializer' => \App\Serializers\ArraySerializer::class,
 
     /* The default paginator to be used when performing a transformation. It
      * may be left empty to use Fractal's default one. This can either be a

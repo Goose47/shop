@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,20 +34,19 @@ Route::middleware('auth')->group(function() {
    Route::post('/users/{id}/delete', [UserController::class, 'delete']);
 
    Route::apiResource('/products', ProductController::class);
-});
 
-Route::middleware('auth')->get('/test', function() {
-    return auth()->user()->name;
+   Route::get('/cart', [CartController::class, 'index']);
+   Route::post('/cart', [CartController::class, 'store']);
+   Route::delete('/cart', [CartController::class, 'destroy']);
+
+   Route::apiResource('/orders', OrderController::class)->except('destroy');
+   Route::post('/orders/proceed', [OrderController::class, 'proceedPayment'])->name('payment.proceed');
 });
 
 //TODO: VUE
-//TODO: add route and loading animations
-//TODO: add catch all route
-//TODO: add previous page router functionality
-//TODO: refactor component names
 //TODO: refactor components (check for computed use, props and data as an objects, code style)
 //TODO: check vuex usage (getters, actions)
-//TODO: add product edit functionality
+
 //TODO: add dashboard
 //TODO: add orders CRUD
 //TODO: add filters to lists
@@ -52,24 +54,24 @@ Route::middleware('auth')->get('/test', function() {
 //TODO: add teleport tag to modal screen
 //TODO: add user filter for banned users and an ability to remove the ban
 //TODO: remove register functionality, admins should create other admins
-//TODO: product create: validate images via yup
-//TODO: product create: fix price (backend accepts it in cents)
-//TODO: add phone number input filter
-//TODO: add a thumbnail for no image product
+//TODO: add carousel for products
+//TODO: add pagination for entities
+//TODO: filter animations and layout
+//TODO: filter timeout, too many requests
 //TODO:
 //TODO: ADD A CUSTOMER APP
 //TODO: customer app must have a checkout, a cart
-//TODO:
+//TODO: route change animations are faster than in admin app
 //TODO:
 //TODO:
 //TODO:
 //TODO: Laravel
-//TODO: add cart functionality
-//TODO: add orders
 //TODO: add checkout functionality (Stripe)
-//TODO: add BaseFilter class and filters for users, products and so on
+//TODO: add webhook for payment processing (after deployment cause webhook must e publicly accessible)
 //TODO: add phone number requirements
 //TODO: CSRF?????
+//TODO: filter wrong column exception
+//TODO: unused model properties in user list (possibly product list), check transformers
 //TODO:
 //TODO: add refresh tokens and a "Remember me" functionality
 //TODO: add token scopes for admins and customers
@@ -80,6 +82,10 @@ Route::middleware('auth')->get('/test', function() {
 //TODO: add frontend images to docker ?????
 //TODO: configure a server
 //TODO: add ssl certificate (certbot)
+//TODO: configure nginx and cors policies
 //TODO:
+//TODO: OPTIMISATION
 //TODO:
+//TODO: Too much queries when using includes in transformers
+//TODO: memo, lazy component includes vue?
 //TODO:

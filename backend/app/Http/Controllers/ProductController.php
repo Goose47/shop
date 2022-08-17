@@ -18,9 +18,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Fractal
+    public function index(Request $request): Fractal
     {
-        return fractal(Product::selectRaw('*, SUBSTRING(description, 1, 150) as description')->latest()->get(), new ProductTransformer());
+        return fractal(Product::selectRaw('*, SUBSTRING(description, 1, 150) as description')->latest()->paginate($request->input('per_page', 100)), new ProductTransformer());
     }
 
     /**

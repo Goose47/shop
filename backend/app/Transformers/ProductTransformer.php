@@ -44,6 +44,6 @@ class ProductTransformer extends TransformerAbstract
 
     public function includeImages(Product $product)
     {
-        return $this->collection($product->images, new ImageTransformer());
+        return $this->collection($product->images, new ImageTransformer(), 'false');
     }
 }
