@@ -14,3 +14,7 @@
 - create a storage symlink with `php artisan storage:link`
 
 stripe webhook
+laravel docs
+env prod mode
+queue
+php artisan make admin

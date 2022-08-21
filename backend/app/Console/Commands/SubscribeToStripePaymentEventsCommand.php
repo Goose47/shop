@@ -19,7 +19,7 @@ class SubscribeToStripePaymentEventsCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Subscribes to stripe payment events using SHOP endpoint';
 
     /**
      * Stripe service to communicate with Stripe API
@@ -36,11 +36,16 @@ class SubscribeToStripePaymentEventsCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): void
     {
-        $this->stripeService->subscribeToPaymentEvent();
+        try {
+            $this->stripeService->subscribeToPaymentEvent();
+        } catch (\Exception $e) {
+            $this->info('An error occurred while subscribing: ');
+            $this->info($e->getMessage());
+            return ;
+        }
+        $this->info('You have successfully subscribed to Stripe payment events');
     }
 }
