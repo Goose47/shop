@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +39,10 @@ Route::middleware('auth')->group(function() {
    Route::delete('/cart', [CartController::class, 'destroy']);
 
    Route::apiResource('/orders', OrderController::class)->except('destroy');
-   Route::post('/orders/proceed', [OrderController::class, 'proceedPayment'])->name('payment.proceed');
 });
+
+//Stripe webhook endpoint
+Route::post('/orders/proceed', [OrderController::class, 'proceedPayment'])->name('payment.proceed');
 
 //TODO: VUE
 //TODO: refactor components (check for computed use, props and data as an objects, code style)
@@ -78,11 +79,9 @@ Route::middleware('auth')->group(function() {
 //TODO: prohibit to ban urself lol
 //TODO:
 //TODO: DEPLOY
-//TODO: add nginx to docker
 //TODO: add frontend images to docker ?????
-//TODO: configure a server
 //TODO: add ssl certificate (certbot)
-//TODO: configure nginx and cors policies
+//TODO: configure nginx storage and cors policies
 //TODO:
 //TODO: OPTIMISATION
 //TODO:

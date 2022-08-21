@@ -26,8 +26,8 @@ class StripeService
         $checkoutSession = Session::create([
             'line_items' => $this->getLineItems($orderItems),
             'mode' => 'payment',
-            'success_url' => env('APP_URL') . '/checkout/success',
-            'cancel_url' => env('APP_URL') . '/checkout/fail'
+            'success_url' => env('FRONTEND_URL') . '/checkout/success',
+            'cancel_url' => env('FRONTEND_URL') . '/checkout/fail'
         ]);
 
         return $checkoutSession->url;
@@ -55,6 +55,7 @@ class StripeService
 
     public function subscribeToPaymentEvent(): void
     {
+        dd(route('payment.proceed'));
         $this->stripe->webhookEndpoints->create([
            'url' => route('payment.proceed'),
             'enabled_events' => [

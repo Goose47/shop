@@ -8,6 +8,7 @@ use App\Http\Requests\Orders\OrderUpdateRequest;
 use App\Models\Order;
 use App\Transformers\OrderTransformer;
 use App\Transformers\SuccessTransformer;
+use App\UseCases\Order\OrderProceedUseCase;
 use App\UseCases\Order\OrderStoreUseCase;
 use App\UseCases\Order\OrderUpdateUseCase;
 use Illuminate\Http\Request;
@@ -41,9 +42,8 @@ class OrderController extends Controller
         return fractal($case($request), new OrderTransformer());
     }
 
-    public function proceedPayment()
+    public function proceedPayment(Request $request, OrderProceedUseCase $case)
     {
-        //TODO: listen to stripe payment event and set order status
-        return fractal(true, new SuccessTransformer());
+        return fractal($case($request), new SuccessTransformer());
     }
 }
