@@ -8,7 +8,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./:/var/www/html
+      - ./:/var/www/shop/backend
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ./nginx/ssl/:/etc/nginx/ssl/
     networks:
@@ -19,7 +19,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: shop/laravel
     volumes:
       - '.:/var/www/shop/backend'
     networks:
@@ -39,7 +38,7 @@ services:
       POSTGRES_USER: 'shop'
       POSTGRES_PASSWORD: 'shop'
     volumes:
-      - 'sail-pgsql:/var/lib/postgresql/data'
+      - 'shop-pgsql:/var/lib/postgresql/data'
     networks:
       - shop
   redis:
@@ -49,14 +48,14 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - 'sail-redis:/data'
+      - 'shop-redis:/data'
     networks:
       - shop
 networks:
-  sail:
+  shop:
     driver: bridge
 volumes:
-  sail-pgsql:
+  shop-pgsql:
     driver: local
-  sail-redis:
+  shop-redis:
     driver: local

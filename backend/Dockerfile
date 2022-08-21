@@ -1,24 +1,27 @@
-FROM php:8.1.0-fpm
+FROM php:8.1-fpm
 
-WORKDIR /var/www/html
+WORKDIR /var/www/shop/backend
 
-RUN apk update && apk add --no-cache \
-    build-base shadow vim curl \
-    php8 \
-    php8-fpm \
-    php8-common \
-    php8-pdo \
-    php8-pdo_mysql \
-    php8-mysqli \
-    php8-pgsql \
-    php8-mcrypt \
-    php8-mbstring \
-    php8-xml \
-    php8-openssl \
-    php8-json \
-    php8-phar \
-    php8-zip \
-    php8-gd \
-    php8-dom \
-    php8-session \
-    php8-zlib
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    locales \
+    libzip-dev \
+    zip \
+    jpegoptim optipng pngquant gifsicle \
+    vim \
+    unzip \
+    git \
+    curl \
+    libpq-dev
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install extensions
+RUN docker-php-ext-install pgsql pdo_pgsql zip exif pcntl
+
+EXPOSE 9000
+CMD ["php-fpm"]

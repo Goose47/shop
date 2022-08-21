@@ -50,9 +50,9 @@
       </p>
     </AppPopup>
 
-    <p class="pt-2">
-      Don't have an account yet? <router-link :to="{name: 'register'}">Sign up</router-link> now!
-    </p>
+<!--    <p class="pt-2">-->
+<!--      Don't have an account yet? <router-link :to="{name: 'register'}">Sign up</router-link> now!-->
+<!--    </p>-->
   </main>
 </template>
 
