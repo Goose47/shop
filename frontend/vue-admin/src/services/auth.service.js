@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ENDPOINT_URL = 'http://localhost:80/api/';
+const ENDPOINT_URL = process.env.VUE_APP_API_URL;
 
 class AuthService {
     login(data) {
