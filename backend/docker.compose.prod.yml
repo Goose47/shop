@@ -51,6 +51,24 @@ services:
       - 'shop-redis:/data'
     networks:
       - shop
+  vue-admin:
+    container_name: shop_vue_admin
+    build:
+      context: ../frontend/vue-admin
+      dockerfile: Dockerfile
+    volumes:
+      - ../frontend/vue-admin:/var/www/html
+    networks:
+      - shop
+  vue-customer:
+    container_name: shop_vue_customer
+    build:
+      context: ../frontend/vue-customer
+      dockerfile: Dockerfile
+    volumes:
+      - ../frontend/vue-customer:/var/www/html
+    networks:
+      - shop
 networks:
   shop:
     driver: bridge
