@@ -81,7 +81,6 @@ Route::post('/orders/proceed', [OrderController::class, 'proceedPayment'])->name
 //TODO: DEPLOY
 //TODO: add frontend images to docker ?????
 //TODO: add ssl certificate (certbot)
-//TODO: configure nginx storage and cors policies
 //TODO: npm install and composer install in dockerfiles
 //TODO:
 //TODO: OPTIMISATION
