@@ -135,7 +135,7 @@ export default {
     }
   },
   watch: {
-    search: sessionService.debounce_next(function (newVal) {
+    search: sessionService.debounce(function (newVal) {
       this.params.search = newVal
       this.fetchUsers()
     }, 500)
