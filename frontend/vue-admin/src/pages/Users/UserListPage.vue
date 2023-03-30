@@ -10,7 +10,7 @@
       </router-link>
     </div>
 
-    <input v-model="params.search" @input="searchUsers" class="form-control form-control-dark w-100 search_input" type="text" placeholder="Search" aria-label="Search">
+    <input v-model="params.search" class="form-control form-control-dark w-100 search_input" type="text" placeholder="Search" aria-label="Search">
 
     <div class="table-responsive">
       <table class="table table-striped table-sm">
@@ -62,6 +62,7 @@
 import userService from "@/services/user.service";
 import UserItem from "@/components/users/UserItem";
 import TableHeaderSort from "@/components/TableHeaderSort";
+import sessionService from "@/services/session.service";
 
 export default {
   name: "UserList",
@@ -88,7 +89,7 @@ export default {
         search: '',
         per_page: 4,
         page: 1
-      }
+      },
     }
   },
   methods: {
@@ -100,7 +101,7 @@ export default {
       this.params.page = res.data.meta.pagination.current_page
       setTimeout(() => {
         this.isLoading = false
-      }, 2000)
+      }, 700)
     },
     sortUsers(sort) {
       //Removing sort parameter with the same name
@@ -110,9 +111,6 @@ export default {
         this.params.sort.push([sort.name, sort.value]);
       }
 
-      this.fetchUsers()
-    },
-    searchUsers(event) {
       this.fetchUsers()
     },
     nextPage() {
@@ -131,7 +129,16 @@ export default {
   computed: {
     itemsOfTotal() {
       return 1 + this.paginationData.per_page * (this.paginationData.current_page - 1) + '-' + this.paginationData.current_page * this.paginationData.per_page + ' of ' + this.paginationData.total
+    },
+    search() {
+      return this.params.search
     }
+  },
+  watch: {
+    search: sessionService.debounce_next(function (newVal) {
+      this.params.search = newVal
+      this.fetchUsers()
+    }, 500)
   },
   mounted() {
     this.fetchUsers()
