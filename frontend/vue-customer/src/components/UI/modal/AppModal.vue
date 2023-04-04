@@ -9,20 +9,22 @@
         <button>Toggle</button>
       </slot>
     </div>
-    <div
-        v-if="active"
-        class="modal_background"
-        @click="closeModal"
-    >
-      <div
-          class="modal_content"
-          @click.stop
-      >
-        <slot>
-          <h5 class="modal-title">Modal title</h5>
-        </slot>
-      </div>
-    </div>
+      <teleport to="#modals">
+          <div
+                  v-if="active"
+                  class="modal_background"
+                  @click="closeModal"
+          >
+              <div
+                      class="modal_content"
+                      @click.stop
+              >
+                  <slot>
+                      <h5 class="modal-title">Modal title</h5>
+                  </slot>
+              </div>
+          </div>
+      </teleport>
   </div>
 </template>
 
