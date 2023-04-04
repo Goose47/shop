@@ -13,6 +13,7 @@ class UserDeleteRequest extends FormRequest
      */
     public function authorize()
     {
+        #this
         return true;
     }
 
