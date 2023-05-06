@@ -10,9 +10,16 @@ services:
     volumes:
       - ./:/var/www/shop/backend
       - ./nginx/conf.d/:/etc/nginx/conf.d/
-      - ./nginx/ssl/:/etc/nginx/ssl/
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     networks:
       - shop
+  certbot:
+    image: certbot/certbot
+    container_name: shop_certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
   laravel:
     container_name: shop_laravel
     restart: unless-stopped
