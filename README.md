@@ -3,7 +3,7 @@
 ## Laravel Installation
 
 - run  `composer install`
-- change the permission of storage by running `chmod -R 777 ./storage`
+- change the permission of storage by running `chmod -R 775 ./storage`
 - change the nome of the corresponding `docker-compose.yml` file
 - specify your database password in `docker-compose.yml` and run `docker-compose up -d`
 > NOTE: you can use sail for local installation
