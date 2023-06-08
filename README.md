@@ -14,8 +14,7 @@
   - migrate your database with `php artisan migrate`
   - create a storage symlink with `php artisan storage:link`
 
-stripe webhook
-laravel docs
-env prod mode
-queue
-php artisan make admin
+
+- https://api.goose47.live
+- https://admin.goose47.live
+- https://customer.goose47.live
